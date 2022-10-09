@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+     <header>
+           <h1>Circular Linked List</h1>
+     </header>
+     <main>
+           <p>In this article, you will learn what circular linked list is and its types with implementation.<br>
+           
+            A circular linked list is a type of linked list in which the first and the last nodes are also connected to each other to form a circle.<br><br>
+            There are basically two types of circular linked list:<br> </p> 
+            <h2>1. Circular Singly Linked List</h2>
+            <p>Here, the address of the last node consists of the address of the first node.</p>  
+            <img src="https://cdn.programiz.com/cdn/farfuture/WUnsDQNTcOXpzieXoaZ26KR1UZd45YhaSp8kyRqseeg/mtime:1621590490/sites/tutorial2program/files/cirular-linked-list.png" alt="Circular Singly Linked List" width="50%">
+            <h2>2. Circular Doubly Linked List</h2>
+            <p>Here, in addition to the last node storing the address of the first node, the first node will also store the address of the last node.</p>
+            <img src="https://cdn.programiz.com/cdn/farfuture/dNxUZMNTHlPHw5SdwtJBTZ25H3G-MIaO1c5VStQb78Q/mtime:1621590479/sites/tutorial2program/files/circular-doubly-linked-list.png" alt="Circular Doubly Linked List" width="50%">
+            <p><b>NOTE:< We will be using the singly circular linked list to represent the working of circular linked list.</b></p>
+ 
+            <h2><b>Representation of Circular Linked List</b></h2>
+            <p>Let's see how we can represent a circular linked list on an algorithm/code. Suppose we have a linked list:</p>
+            <img src="https://cdn.programiz.com/cdn/farfuture/SjSqqvmvw0vvcijYfk8DkLVHJcLb4TKb5klb14dufrc/mtime:1621590486/sites/tutorial2program/files/cirular-linked-list-example.png" alt="Initial Circular Linked List" width="50%">
+ 
+            <p>Here, the single node is represented as</p>
+            <p>struct Node {<br>
+                int data;<br>
+                struct Node * next;<br>};
+            </p>
+            <p>
+              Each struct node has a data item and a pointer to the next struct node.<br><br>
+ 
+              Now we will create a simple circular linked list with three items to understand how this works.
+            </p>
+            <p>
+              /* Initialize nodes */<br>
+              struct node *last;<br>
+              struct node *one = NULL;<br>
+              struct node *two = NULL;<br>
+              struct node *three = NULL;<br>
+                     
+              /* Allocate memory */<br>
+              one = malloc(sizeof(struct node));<br>
+              two = malloc(sizeof(struct node));<br>
+              three = malloc(sizeof(struct node));<br>
+                     
+              /* Assign data values */<br>
+              one->data = 1;<br>
+              two->data = 2;<br>
+              three->data = 3;<br>
+                     
+              /* Connect nodes */<br>
+              one->next = two;<br>
+              two->next = three;<br>
+              three->next = one;<br>
+                     
+              /* Save address of third node in last */<br>
+              last = three;
+            </p>
+            <p>
+                In the above code, one, two, and three are the nodes with data items 1, 2, and 3 respectively.
+            </p>
+                             
+            <h4>
+                For node one
+
+            </h4>                  
+            <ul>
+              <li> 
+                 <b>next</b> stores the address of <b>two</b> (there is no node before it)
+              </li>
+            </ul>
+            <h4>
+                For node two
+            </h4>
+             <ul>
+                <li>
+                    <b>next</b> stores the address of <b> three</b>
+                </li>
+            </ul> 
+            <h4>
+                For node three
+            </h4>  
+            <ul>
+                <li>
+                    <b>next</b> stores <b>NULL</b> (there is no node after it)
+                </li>
+                <li>
+                    <b>next</b> points to node <b>one</b>
+                </li>
+            
+            </ul> 
+             <h2>
+                Insertion on a Circular Linked List
+            </h2><br>
+            <p>We can insert elements at 3 different positions of a circular linked list</p>
+            <ol>
+                <li>
+                    Insertion at the beginning
+                </li>
+                <li>
+                    Insertion in-between nodes
+
+                </li>
+                <li>
+                    Insertion at the end
+
+                </li>
+            </ol>
+            <p>Suppose we have a circular linked list with elements 1, 2, and 3</p>
+            <img src="https://cdn.programiz.com/cdn/farfuture/SjSqqvmvw0vvcijYfk8DkLVHJcLb4TKb5klb14dufrc/mtime:1621590486/sites/tutorial2program/files/cirular-linked-list-example.png"alt="Initial Circular Linked list"width="50%">
+            <p> Let's add a node with value 6 at different positions of the circular linked list we made above. The first step is to create a new node.</p>
+            <ul>
+                <li>allocate memory for <b>newNode</b></li>
+                <li>assign the data to <b>newNode</b></li>
+            </ul>
+            <img src="https://cdn.programiz.com/cdn/farfuture/eoqwO9tQCqeMfojHIs-HGJMpy3LS5yGMw2sH1q8UNBE/mtime:1621590589/sites/tutorial2program/files/cll-newnode.png"alt="newNode"width="50%">         
+            <h3>1. Insertion at the Beginning</h3>
+            <ul>
+               <li>store the address of the current first node in the newNode (i.e. pointing the newNode to the current first node)</li>
+               <li>point the last node to newNode (i.e making newNode as head)</li>
+            </ul>
+            <img src="https://cdn.programiz.com/cdn/farfuture/ZbeR-ttObPTEY-LVVg4Jzi3BkT-u2Rtls2OuLhW9ZmQ/mtime:1621590575/sites/tutorial2program/files/cll-insertion-beginning.png"alt="Insert at the beginning"width="50%">
+            <h3>2. Insertion in between two nodes</h3>
+            <p>Let's insert newNode after the first node.</p>
+            <ul>
+                <li>travel to the node given (let this node be <b>p</b>)</li>
+                <li>point the <b>next</b> of <b>newNode</b> to the node next to <b>p</b></li>
+                <li>store the address of <b>newNode</b> at next of <b>p</b></li>
+            </ul>  
+            <img src="https://cdn.programiz.com/cdn/farfuture/Rh_QKdtTZMj3QMFhUBfC3apBt-2pV3zJ69-95-VGT-M/mtime:1621590516/sites/tutorial2program/files/cll-insertion-after.png"alt="insertion at a node"width="50%">        
+            <h3>3. Insertion at the end</h3>
+            <ul>
+                <li>store the address of the head node to <b>next</b> of newNode (making <b>newNode</b> the last node)</li>
+                <li>point the current last node to <b>newNode</b></li>
+                <li>make <b>newNode</b> as the last node</li>
+            </ul>
+            <img src="https://cdn.programiz.com/cdn/farfuture/_m8Wt-ep1mVng3Mr7NlNcMS2PKqNkVaMr-_5hsbTf9w/mtime:1621590583/sites/tutorial2program/files/cll-insertion-end.png"alt="insertion at end"width="50%">
+                            
+            <h2>Deletion on a Circular Linked List</h2>
+            <p>Suppose we have a double-linked list with elements 1, 2, and 3.</p>
+            <img src="https://cdn.programiz.com/cdn/farfuture/SjSqqvmvw0vvcijYfk8DkLVHJcLb4TKb5klb14dufrc/mtime:1621590486/sites/tutorial2program/files/cirular-linked-list-example.png"alt="Initial circular linked list"width="50%">
+            <h3>1. If the node to be deleted is the only node</h3>
+            <ul>
+               <li>free the memory occupied by the node</li>
+               <li>store NULL in <b>last</b></li>
+            </ul> 
+            <h3>2. If last node is to be deleted</h3>
+            <ul>
+                <li>find the node before the last node (let it be <b>temp</b>)</li>
+                <li>store the address of the node next to the last node in  <b>temp</b></li>
+                <li>free the memory of last</li>
+                <li>make <b>temp</b> as the last node</li>
+            </ul> 
+            <img src="https://cdn.programiz.com/cdn/farfuture/XhbcFFIomAnL5iJoqoysU_1A-UFXfDZTfIvB7yu7k-Q/mtime:1621590509/sites/tutorial2program/files/cll-deletion-last.png"alt="Delete the node"width="50%">
+            <h3>3. If any other nodes are to be deleted</h3>
+            <ul>
+                <li>travel to the node to be deleted (here we are deleting node 2)</li>
+                <li>let the node before node 2 be <b>temp</b></li>
+                <li>store the address of the node next to 2 in<b>temp</b></li>
+                <li>free the memory of 2</li>
+            </ul>
+            <img src="https://cdn.programiz.com/cdn/farfuture/KMgmU6sQkAs6W4xfi4tGLbX91Y9cgI0pqPRsWNegK9A/mtime:1621590501/sites/tutorial2program/files/cll-deletion-after.png"alt="Delete a specific node"width=""> 
+            <h2>Circular Linked List Code </h2>
+            <p>// Java code to perform circular linked list operations<br>
+ 
+               class CircularLinkedList {<br>
+     
+                             static class Node {<br>                        
+                             int data;<br>
+                             Node next;<br>
+                             };<br>
+                             <br>
+                             static Node addToEmpty(Node last, int data) {<br>
+                             if (last != null)<br>
+                             return last;<br>
+                             <br>
+                             // allocate memory to the new node<br>
+                             Node newNode = new Node();<br>
+ 
+                             // assign data to the new node<br>
+                             newNode.data = data;<br>
+                         
+                             // assign last to newNode<br>
+                             last = newNode;<br>
+                         
+                             // create link to iteself<br>
+                             newNode.next = last;<br>
+                         
+                              return last;<br>
+                              }<br>
+                              <br>
+                              // add node to the front<br>
+                             static Node addFront(Node last, int data) {<br>
+                             if (last == null)
+                             return addToEmpty(last, data);<br>
+                          
+                             // allocate memory to the new node<br>
+                             Node newNode = new Node();<br>
+                         
+                             // add data to the node<br>
+                             newNode.data = data;<br>
+                         
+                             // store the address of the current first node in the newNode<br>
+                             newNode.next = last.next;<br>
+                         
+                             // make newNode as head<br>
+                             last.next = newNode;<br>
+                         
+                             return last;<br>
+                           }<br>
+                         
+                           // add node to the end<br>
+                           static Node addEnd(Node last, int data) {<br>
+                             if (last == null)<br>
+                               return addToEmpty(last, data);<br>
+                         
+                             // allocate memory to the new node<br>
+                             Node newNode = new Node();<br>
+                         
+                             // add data to the node<br>
+                             newNode.data = data;<br>
+                         
+                             // store the address of the head node to next of newNode<br>
+                             newNode.next = last.next;<br>
+                         
+                             // point the current last node to the newNode<br>
+                             last.next = newNode;<br>
+                         
+                             // make newNode as the last node<br>
+                             last = newNode;<br>
+                         
+                             return last;<br>
+                           }<br>
+                         
+                           static Node addAfter(Node last, int data, int item) {<br>
+                             if (last == null)<br>
+                               return null;<br>
+                         
+                             Node newNode, p;<br>
+                             p = last.next;<br>
+                             do {<br>
+                               // if the item is found, place newNode after it<br>
+                               if (p.data == item) {<br>
+                                 // allocate memory to the new node<br>
+                                 newNode = new Node();<br>
+                         
+                                 // add data to the node<br>
+                                 newNode.data = data;<br>
+                         
+                                 // make the next of the current node as the next of newNode<br>
+                                 newNode.next = p.next;<br>
+                         
+                                 // put newNode to the next of p<br>
+                                 p.next = newNode;<br>
+                         
+                                 // if p is the last node, make newNode as the last node<br>
+                                 if (p == last)<br>
+                                   last = newNode;<br>
+                                 return last;<br>
+                               }<br>
+                               p = p.next;<br>
+                             }<br> while (p != last.next);<br>
+                         
+                             System.out.println(item + "The given node is not present in the list");<br>
+                             return last;<br>
+                         
+                           }<br>
+                            <br>
+                            // delete a node<br>
+                            static Node deleteNode(Node last, int key) {<br>
+                            // if linked list is empty<br>
+                            if (last == null)<br>
+                            return null;<br>
+                            <br>
+                             // if the list contains only a single node<br>
+                             if (last.data == key && last.next == last) {<br>
+                               last = null;<br>
+                               return last;<br>
+                             }<br>
+                         
+                             Node temp = last, d = new Node();<br>
+                         
+                             // if last is to be deleted<br>
+                             if (last.data == key) {<br>
+                               // find the node before the last node<br>
+                               while (temp.next != last) {<br>
+                                 temp = temp.next;<br>
+                               }<br>
+                                <br>
+                               // point temp node to the next of last i.e. first node<br>
+                               temp.next = last.next;<br>
+                               last = temp.next;<br>
+                             }
+                             <br>
+                             // travel to the node to be deleted<br>
+                             while (temp.next != last && temp.next.data != key) {<br>
+                               temp = temp.next;<br>
+                             }<br>
+                         
+                             // if node to be deleted was found<br>
+                             if (temp.next.data == key) {<br>
+                               d = temp.next;<br>
+                               temp.next = d.next;<br>
+                             }<br>
+                             return last;<br>
+                           }<br>
+                           <br>
+                           static void traverse(Node last) {<br>
+                             Node p;<br>
+                         
+                             if (last == null) {<br>
+                               System.out.println("List is empty.");<br>
+                               return;<br>
+                             }<br>
+                         
+                             p = last.next;<br>
+                         
+                             do {<br>
+                               System.out.print(p.data + " ");<br>
+                               p = p.next;<br>
+                         
+                             }<br>
+                             while (p != last.next);<br>
+                         
+                           }<br>
+                         
+                           public static void main(String[] args) {<br>
+                             Node last = null;<br>
+                         
+                             last = addToEmpty(last, 6);<br>
+                             last = addEnd(last, 8);<br>
+                             last = addFront(last, 2);<br>
+                         
+                             last = addAfter(last, 10, 2);<br>
+                         
+                             traverse(last);<br>
+                         
+                             deleteNode(last, 8);<br>
+                             traverse(last);<br>
+                           }<br>
+                         }</p> 
+            <h2>Circular Linked List Complexity</h2>
+            <center>
+                <table border="1" >
+                   <tr>
+                      <th>Circular Linked List Complexity</th>
+                      <th>Time Complexity</th>
+                      <th>Space Complexity</th>
+                   </tr>
+                   <tr>
+                      <td>Insertion Operation</td>
+                      <td>O(1) or O(n)</td>
+                      <td>O(1)</td>
+                   </tr>
+                   <tr>
+                      <td>Deletion Operation</td>
+                      <td>O(1)</td>
+                      <td>O(1)</td>
+                   </tr>
+                </table> 
+           </center>    
+            <h3>1. Complexity of Insertion Operation</h3>
+            <ul>
+                <li>The insertion operations that do not require traversal have the time complexity of <b>O(1)</b>.</li>
+                <li>And, an insertion that requires traversal has a time complexity of <b>O(n)</b>.</li>
+                <li>The space complexity is <b>O(1)</b></li>
+            </ul>
+            <h3>2. Complexity of Deletion Operation</h3>
+            <ul>
+              <li>All deletion operations run with a time complexity of <b>O(1)</b>.</li>
+              <li>And, the space complexity is <b>O(1)</b>.</li>
+            </ul>
+            <h2>Why Circular Linked List?</h2>
+            <ol>
+                <li>The NULL assignment is not required because a node always points to another node.</li>
+                <li>The starting point can be set to any node.</li>
+                <li>Traversal from the first node to the last node is quick.</li>
+            </ol>    
+            <h2>Circular Linked List Applications</h2>
+            <ul>
+              <li>It is used in multiplayer games to give a chance to each player to play the game.</li>
+              <li>Multiple running applications can be placed in a circular linked list on an operating system. The os keeps on iterating over these applications.</li>
+            </ul>
+            <h3>
+                to learn more go to the below mention link 
+            </h3>
+            <a href="Doubly Linked List.html" target="_blank"><b><i>Doubly Linked List</i></b></a>
+               
+            <a href="Reverse of a linked List.html" target="_blank"><b><i>Reverse of a linked List</i></b></a><br>
+            <a href="index.html">Home</a>
+     </main>
+</body>
+</html>

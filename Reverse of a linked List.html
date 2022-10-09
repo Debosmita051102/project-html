@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+           <h1>
+              Reverse a linked list
+           </h1>
+    </header>
+    <main>
+        <p>Given pointer to the head node of a linked list, the task is to reverse the linked list. We need to reverse the list by changing the links between nodes.</p>
+        <p> <b>Input:</b> Head of following linked list</p>
+        <p><b>1->2->3->4->NULL </b></p>
+        <p><b>Output</b>: Linked list should be changed to, </p>
+        <p><b>4->3->2->1->NULL</b></p>
+        <h3>Iterative Method </h3>
+        
+           <p>START-->Initialize three pointers prev as NULL, curr as head and next as NULL ----> Iterate through the linked list. In loop, do following.</p>
+           <p>// Before changing next of current,// store next node.</p>
+           <p><b>next = curr->next</b></p>
+           <p>// Now change next of current.// This is where actual reversing happens </p>
+           <p><b>curr->next = prev </b></p>
+           <p>// Move prev and curr one step forward </p>
+           <p><b>prev = curr </b></p>
+           <p><b>curr = next</b></p>
+        
+        <img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/RGIF2.gif" alt=" Reverse a linked list"width="500px">
+        <h3>coding---></h3>
+        <div >
+        <p >class LinkedList {<br>
+ 
+            static Node head;<br>
+         
+            static class Node {<br>
+         
+                int data;<br>
+                Node next;<br>
+         
+                Node(int d)<br>
+                {<br>
+                    data = d;<br>
+                    next = null;<br>
+                }<br>
+            }<br>
+         
+           <br> /* Function to reverse the linked list */<br>
+            Node reverse(Node node)<br>
+            {<br>
+                Node prev = null;<br>
+                Node current = node;<br>
+                Node next = null;<br>
+                while (current != null) {<br>
+                    next = current.next;<br>
+                    current.next = prev;<br>
+                    prev = current;<br>
+                    current = next;<br>
+                }<br>
+                node = prev;<br>
+                return node;<br>
+            }<br>
+         
+           <br> // prints content of double linked list<br>
+            void printList(Node node)<br>
+            {<br>
+                while (node != null) {<br>
+                    System.out.print(node.data + " ");<br>
+                    node = node.next;<br>
+                }<br>
+            }<br>
+         
+            // Driver Code<br>
+            public static void main(String[] args)<br>
+            {<br>
+                LinkedList list = new LinkedList();<br>
+                list.head = new Node(85);<br>
+                list.head.next = new Node(15);<br>
+                list.head.next.next = new Node(4);<br>
+                list.head.next.next.next = new Node(20);<br>
+         
+                System.out.println("Given Linked list");<br>
+                list.printList(head);<br>
+                head = list.reverse(head);<br>
+                System.out.println("");<br>
+                System.out.println("Reversed linked list ");<br>
+                list.printList(head);<br>
+            }<br>
+        }<br>
+         </p>
+         <h2>Time Complexity: O(n) <br>
+            Auxiliary Space: O(1)
+        </h2>
+         </div>
+         <h4>another approach</h4>
+         <div> <p>This operation is a thorough one. We need to make the last node to be pointed by the head node and reverse the whole linked list.</p>
+            <img src="https://www.tutorialspoint.com/data_structures_algorithms/images/linked_list_reverse_0.jpg"alt="Reverse operation"width="50%">
+            <p>First, we traverse to the end of the list. It should be pointing to NULL. Now, we shall make it point to its previous node −</p>
+            <img src="https://www.tutorialspoint.com/data_structures_algorithms/images/linked_list_reverse_1.jpg"width="50%">
+            <p>We have to make sure that the last node is not the last node. So we'll have some temp node, which looks like the head node pointing to the last node. Now, we shall make all left side nodes point to their previous nodes one by one.</p>
+            <img src="https://www.tutorialspoint.com/data_structures_algorithms/images/linked_list_reverse_2.jpg"width="50%">
+            <p>Except the node (first node) pointed by the head node, all nodes should point to their predecessor, making them their new successor. The first node will point to NULL.</p>
+            <img src="https://www.tutorialspoint.com/data_structures_algorithms/images/linked_list_reverse_3.jpg"width="50%">
+            <p>We'll make the head node point to the new first node by using the temp node.</p>
+            <img src="https://www.tutorialspoint.com/data_structures_algorithms/images/linked_list_reverse_4.jpg"width="50%">
+            <p>The linked list is now reversed.</p></div>
+            <div>
+                <h3>Recursive Method: </h3>
+                <ol>
+                    <li> Divide the list in two parts - first node and rest of the linked list.</li>
+                    <li> Call reverse for the rest of the linked list.</li>
+                    <li> Link rest to first.</li>
+                    <li>Fix head pointer</li>
+                </ol>
+                <img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/2009/07/Linked-List-Rverse.gif" alt="  Reverse a linked list"width="500px">
+                <h4>coding---></h4>
+                <p>
+                    class recursion {<br>
+                    static Node head; // head of list<br>
+                     
+                    static class Node {<br>
+                        int data;<br>
+                        Node next;<br>
+                        Node(int d)<br>
+                        {<br>
+                            data = d;<br>
+                            next = null;<br>
+                        }<br>
+                    }<br>
+                 
+                    static Node reverse(Node head)<br>
+                    {<br>
+                        if (head == null || head.next == null)<br>
+                            return head;<br>
+                 
+                        /* reverse the rest list and put<br>
+                        the first element at the end */<br>
+                        Node rest = reverse(head.next);<br>
+                        head.next.next = head;<br>
+                 
+                        /* tricky step -- see the diagram */<br>
+                        head.next = null;<br>
+                 
+                        /* fix the head pointer */<br>
+                        return rest;<br>
+                    }<br>
+                 
+                    /* Function to print linked list */<br>
+                    static void print()<br>
+                    {<br>
+                        Node temp = head;<br>
+                        while (temp != null) {<br>
+                            System.out.print(temp.data + " ");<br>
+                            temp = temp.next;<br>
+                        System.out.println();<br>
+                    }<br>
+                 
+                    static void push(int data)<br>
+                    {<br>
+                        Node temp = new Node(data);<br>
+                        temp.next = head;<br>
+                        head = temp;<br>
+                    }<br>
+                  
+                 
+                /* Driver program to test above function*/<br>
+                public static void main(String args[])<br>
+                {<br>
+                    /* Start with the empty list */<br>
+                      
+                    push(20);<br>
+                    push(4);<br>
+                    push(15);<br>
+                    push(85);<br>
+                 <br>
+                    System.out.println("Given linked list");<br>
+                    print();<br>
+                 
+                    head = reverse(head);<br>
+                 
+                    System.out.println("Reversed Linked list");<br>
+                    print();<br>
+                }<br>
+                }<br>
+                 </p>
+                 <h3>Output: </h3>
+                 <p>
+                    Given linked list<br>
+                    <b>85 15 4 20</b><br>
+                    Reversed Linked list<br>
+                    <b>20 4 15 85</b>
+                </p>
+                <h2>Time Complexity: O(n) <br>
+                    Auxiliary Space: O(n)
+                </h2>
+            </div>
+            <a href="Doubly Linked List.html" target="_blank"><b><i>Doubly Linked List</i></b></a>
+            <a href="circular Linked List.html" target="_blank"><b><i>circular Linked List</i></b></a><br>
+            <a href="index.html">Home</a>
+                
+
+    </main>
+</body>
+</html>

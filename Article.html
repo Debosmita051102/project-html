@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>
+            Linked List
+        </h1>
+        <h2>
+            Types of Linked List
+        </h2>
+    </header>
+    <main>
+        <p>Following are the various types of linked list</p>
+        <ul>
+
+            <li><b>Simple Linked List</b>-Item navigation is forward only</li>
+            <li><b>Doubly Linked List</b>- Items can be navigated forward and backward</li>
+            <li><b>Circular Linked List</b>-Last item contains link of the first element as next and the first element has a link to the last element as previous.</li>
+        </ul>
+
+        <h2>Basic Operations</h2>
+        <p>Following are the basic operations supported by a list</p>
+        <ul>
+            <li><b>Insertion</b>-Adds an element at the beginning of the list.</li>
+            <li><b>Deletion</b>-Deletes an element at the beginning of the list</li>
+            <li><b>Display</b>-Displays the complete list.</li>
+            <li><b>Search</b>-Searches an element using the given key.</li>
+            <li><b>Delete</b>- Deletes an element using the given key.</li>
+        </ul>
+
+        <h2>
+           Insertion Operation
+        </h2>
+        <p>Adding a new node in linked list is a more than one step activity. We shall learn this with diagrams here. First, create a node using the same structure and find the location where it has to be inserted</p>
+        <img src="https://www.tutorialspoint.com/data_structures_algorithms/images/linked_list_insertion_0.jpg"alt="Insertion operation"width="50%">
+        <p>Imagine that we are inserting a node <b>B</b> (NewNode), between <b>A</b> (LeftNode) and <b>C</b> (RightNode). Then point B.next to C −<b>NewNode.next −> RightNode;</b></p>
+        <p>It should look like this −</p>
+        <img src="https://www.tutorialspoint.com/data_structures_algorithms/images/linked_list_insertion_1.jpg"width="50%">
+        <p>Now, the next node at the left should point to the new node</p>
+        <p><b>LeftNode.next −> NewNode;</b></p>
+        <img src="https://www.tutorialspoint.com/data_structures_algorithms/images/linked_list_insertion_2.jpg"width="50%">
+        <p>This will put the new node in the middle of the two. The new list should look like this −</p>
+        c
+        <p>Similar steps should be taken if the node is being inserted at the beginning of the list. While inserting it at the end, the second last node of the list should point to the new node and the new node will point to NULL.</p>
+        <br>
+        <h2>Deletion Operation</h2>
+        <p>Deletion is also a more than one step process. We shall learn with pictorial representation. First, locate the target node to be removed, by using searching algorithms.</p>
+        <img src="https://www.tutorialspoint.com/data_structures_algorithms/images/linked_list_deletion_0.jpg"alt="Deletion operation"width="50%">
+        <P>The left (previous) node of the target node now should point to the next node of the target node −</P>
+        <p><b>LeftNode.next −> TargetNode.next;</b></p>
+        <img src="https://www.tutorialspoint.com/data_structures_algorithms/images/linked_list_deletion_1.jpg"width="50%">
+        <P>This will remove the link that was pointing to the target node. Now, using the following code, we will remove what the target node is pointing at</P>
+
+        <p><b>TargetNode.next −> NULL;</b></p>
+        <img src="https://www.tutorialspoint.com/data_structures_algorithms/images/linked_list_deletion_2.jpg"width="50%">
+        <p>We need to use the deleted node. We can keep that in memory otherwise we can simply deallocate memory and wipe off the target node completely.</p>
+        <img src="https://www.tutorialspoint.com/data_structures_algorithms/images/linked_list_deletion_3.jpg"width="50%">
+        <br>
+        <h2>Reverse Operation</h2>
+        <p>This operation is a thorough one. We need to make the last node to be pointed by the head node and reverse the whole linked list.</p>
+        <img src="https://www.tutorialspoint.com/data_structures_algorithms/images/linked_list_reverse_0.jpg"alt="Reverse operation"width="50%">
+        <p>First, we traverse to the end of the list. It should be pointing to NULL. Now, we shall make it point to its previous node −</p>
+        <img src="https://www.tutorialspoint.com/data_structures_algorithms/images/linked_list_reverse_1.jpg"width="50%">
+        <p>We have to make sure that the last node is not the last node. So we'll have some temp node, which looks like the head node pointing to the last node. Now, we shall make all left side nodes point to their previous nodes one by one.</p>
+        <img src="https://www.tutorialspoint.com/data_structures_algorithms/images/linked_list_reverse_2.jpg"width="50%">
+        <p>Except the node (first node) pointed by the head node, all nodes should point to their predecessor, making them their new successor. The first node will point to NULL.</p>
+        <img src="https://www.tutorialspoint.com/data_structures_algorithms/images/linked_list_reverse_3.jpg"width="50%">
+        <p>We'll make the head node point to the new first node by using the temp node.</p>
+        <img src="https://www.tutorialspoint.com/data_structures_algorithms/images/linked_list_reverse_4.jpg"width="50%">
+        <p>The linked list is now reversed.</p>
+        <h5>To learn more click on the below mention link--></h5>
+        <a href="relative Article.html"> <big><b><i>relative Article</i></b></big> </a><br>
+        <a href="index.html">Home</a>
+    </main>     
+</body>
+</html>

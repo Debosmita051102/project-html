@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+           <h1>Doubly Linked List</h1>
+    </header>
+    <main>
+         <h3>What is Doubly Linked List?</h3>
+         <div>
+            <p>In computer science, a doubly linked list is a linked data structure that consists of a set of sequentially linked records called nodes.
+                 Each node contains three fields: two link fields (references to the previous and to the next node in the sequence of nodes) and one data field.
+            </p>
+            <img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/gq/2014/03/DLL1.png"width="700px"alt="Doubly Linked List"><br>
+            <h3>Below are operations on the given DLL:</h3><br>
+            <p>
+              <ol>
+                 <li>
+                   <b>Add a node at the front of DLL:</b> The new node is always added before the head of the given Linked List. And the newly added node becomes the new head of DLL & maintaining a global variable for counting the total number of nodes at that time.
+                 </li><br>
+                 <li>
+                    <b>Traversal of a Doubly linked list</b>
+                 </li><br>
+                 <li>
+                    <b>Insertion of a node:</b> This can be done in three ways:
+                    <ul>
+                        <li>
+                            <b>At the beginning: </b>The new created node is insert in before the head node and head points to the new node.
+                        </li>
+                        <li>
+                           <b> At the end:</b> The new created node is insert at the end of the list and tail points to the new node.
+                        </li>
+                        <li>
+                           <b> At a given position:</b> Traverse the given DLL to that position(let the node be X) then do the following:
+                           <ol>
+                            <i>
+                                <li>
+                                    Change the next pointer of new Node to the next pointer of Node X.
+                                </li>
+                                <li>
+                                    Change the prev pointer of next Node of Node X to the new Node.
+                                </li>
+                                <li>
+                                    Change the next pointer of node X to new Node.
+                                </li>
+                                <li>
+                                    Change the prev pointer of new Node to the Node X.
+                                </li>
+                            </i>
+                           </ol>
+                        </li>
+                    </ul>
+                 </li><br>
+                 <li>
+                   <b> Deletion of a node:</b> This can be done in three ways:
+                   <ul>
+                      <li>
+                       <b>At the beginning:</b> Move head to the next node to delete the node at the beginning and make previous pointer of current head to NULL .
+                      </li>
+                      <li>
+                        <b>At the last: </b>Move tail to the previous node to delete the node at the end and make next pointer of tail node to NULL.
+                      </li>
+                      <li>
+                        <b>At a given position: </b>Let the prev node of Node at position pos be Node X and next node be Node Y, then do the following:
+                        <ol>
+                            <i>
+                               <li>
+                                Change the next pointer of Node X to Node Y.
+                               </li>
+                               <li>
+                                Change the previous pointer of Node Y to Node X.
+                               </li>
+                            </i>
+                        </ol> 
+                      </li>
+                   </ul>
+                 </li><br>
+              </ol> 
+            </p>
+            <h3>
+                Following is a representation of a DLL node:
+            </h3>
+            <p>
+                public class DLL {<br>
+     
+                    // Head of list<br>
+                    Node head;<br>
+                 
+                    // Doubly Linked list Node<br>
+                    class Node {<br>
+                        int data;<br>
+                        Node prev;<br>
+                        Node next;<br>
+                 
+                        // Constructor to create a new node<br>
+                        // next and prev is by default initialized as null<br>
+                        Node(int d) {<br> data = d;<br> }<br>
+                    }<br>
+                } <br>
+            </p>
+            <h3>
+                Delete a node in a Doubly Linked List
+            </h3>
+            <p>
+                public class DLL {<br>
+                    Node head; // head of list<br>
+                 
+                    /* Doubly Linked list Node*/<br>
+                    class Node {<br>
+                        int data;<br>
+                        Node prev;<br>
+                        Node next;<br>
+                 
+                        // Constructor to create a new node<br>
+                        // next and prev is by default initialized<br>
+                        // as null<br>
+                        Node(int d) { data = d;<br> }<br>
+                    }<br>
+                 
+                    // Adding a node at the front of the list<br>
+                    public void push(int new_data)<br>
+                    {<br>
+                        // 1. allocate node<br>
+                        // 2. put in the data<br>
+                        Node new_Node = new Node(new_data);<br>
+                 
+                        // 3. Make next of new node as head<br>
+                        // and previous as NULL<br>
+                        new_Node.next = head;<br>
+                        new_Node.prev = null;<br>
+                 
+                        // 4. change prev of head node to new node<br>
+                        if (head != null)<br>
+                            head.prev = new_Node;<br>
+                 
+                        // 5. move the head to point to the new node<br>
+                        head = new_Node;<br>
+                    }<br>
+                 
+                    // This function prints contents of linked list<br>
+                    // starting from the given node<br>
+                    public void printlist(Node node)<br>
+                    {
+                        Node last = null;<br>
+                 
+                        while (node != null) {<br>
+                            System.out.print(node.data + " ");<br>
+                            last = node;<br>
+                            node = node.next;<br>
+                        }<br>
+                 
+                        System.out.println();<br>
+                    }<br>
+                 
+                    // Function to delete a node in a Doubly Linked List.<br>
+                    // head_ref --> pointer to head node pointer.<br>
+                    // del --> data of node to be deleted.<br>
+                    void deleteNode(Node del)<br>
+                    {<br>
+                 
+                        // Base case<br>
+                        if (head == null || del == null) {<br>
+                            return;<br>
+                        }<br>
+                 
+                        // If node to be deleted is head node<br>
+                        if (head == del) {<br>
+                            head = del.next;<br>
+                        }<br>
+                 
+                        // Change next only if node to be deleted<br>
+                        // is NOT the last node<br>
+                        if (del.next != null) {<br>
+                            del.next.prev = del.prev;<br>
+                        }<br>
+                 
+                        // Change prev only if node to be deleted<br>
+                        // is NOT the first node<br>
+                        if (del.prev != null) {<br>
+                            del.prev.next = del.next;<br>
+                        }<br>
+                 
+                        // Finally, free the memory occupied by del<br>
+                        return;<br>
+                    }<br>
+                 
+                    // Driver Code<br>
+                    public static void main(String[] args)<br>
+                    {
+                        // Start with the empty list<br>
+                        DLL dll = new DLL();<br>
+                 
+                        // Insert 2. So linked list becomes 2->NULL<br>
+                        dll.push(2);<br>
+                 
+                        // Insert 4. So linked list becomes 4->2->NULL<br>
+                        dll.push(4);<br>
+                 
+                        // Insert 8. So linked list becomes 8->4->2->NULL<br>
+                        dll.push(8);<br>
+                 
+                        // Insert 10. So linked list becomes<br>
+                        // 10->8->4->2->NULL<br>
+                        dll.push(10);<br>
+                 
+                        System.out.print("Original Linked list ");<br>
+                        dll.printlist(dll.head);<br>
+                 
+                 
+                        dll.deleteNode(dll.head); /*delete first node*/<br>
+                        dll.deleteNode(dll.head.next); /*delete middle node*/<br>
+                        dll.deleteNode(dll.head.next); /*delete last node*/<br>
+                 
+                        System.out.print(<br>
+                            "\nModified Linked list ");<br>
+                        dll.printlist(dll.head);<br>
+                    }<br>
+                }<br> 
+            </p>
+            <h4>
+                Output:
+            </h4>
+            <p>
+                Original Linked list <b>10 8 4 2</b> <br>
+                Modified Linked list <b>8</b> <br>
+            </p>
+            <h3>
+                Time Complexity: O(1). <br>
+                <small>traversal of the linked list is not required so the time complexity is constant.<br></small>
+                Auxiliary Space: O(1).<br> 
+            <small> As no extra space is required, so the space complexity is constant.<br></small>
+            </h3>
+        </div>
+        <div>
+            <h2>
+                Insertion in Circular Doubly Linked List:
+            </h2>
+            <ol>
+                <li>
+                    <h4>
+                        Insertion at the end:
+                    </h4>
+                    <img src="https://static.javatpoint.com/ds/images/insertion-in-doubly-linked-list-at-the-end.png"width="500px"alt=" Insertion at the end">
+                    <p>
+                        class PrepInsta<br>
+                        {  <br>
+                            //Constitiute a node of the doubly linked list  <br>
+                            class Node{  <br>
+                                int data; <br> 
+                                Node prev;  <br>
+                                Node next;  <br>
+                                public Node(int data) {  <br>
+                                    this.data = data;  <br>
+                                }  <br>
+                            }  <br>
+                        // Function to traverse and print the linked list<br>
+                        public void display() {<br>
+                            Node temp = head;<br>
+                            while (temp != null) {<br>
+                                System.out.print(temp.data + "–>");<br>
+                                // Set temp to point to the next node<br>
+                                temp = temp.next;<br>
+                            }<br>
+                            System.out.println("END");<br>
+                        }<br>
+                            //Constitiute the head and tail of the doubly linked list  <br>
+                            Node head, tail = null;  <br>
+                            //appendAtEnd function will add a node to the end of the list <br> 
+                            public void appendAtEnd(int data) {  <br>
+                                //Create a new node <br> 
+                                Node newNode = new Node(data); <br> 
+                                //Check if the list is empty<br>  
+                                if(head == null) {  <br>
+                                    //Both head and tail will point towards the newNode  <br>
+                                    head = tail = newNode;<br>  
+                                    //head's previous will point towards null <br> 
+                                    head.prev = null;  <br>
+                                    //tail's next will point towards null, as it is the last node of the list<br>  
+                                    tail.next = null; <br> 
+                                }  <br>
+                                //Append newNode as new tail of the list  <br>
+                                else {  <br>
+                                    //newNode will be added after tail such that tail's next will point to newNode  <br>
+                                    tail.next = newNode;  <br>
+                                    //newNode's previous will point to tail <br> 
+                                    newNode.prev = tail; <br> 
+                                    //newNode will become new tail  <br>
+                                    tail = newNode;  <br>
+                                    //As it is last node, tail's next will point to null <br> 
+                                    tail.next = null;  <br>
+                                }  <br>
+                            }<br>
+                            //print() will print the nodes of the doubly linked list <br>
+                               void print() {  <br>
+                                //Node current will point to head <br> 
+                                Node curr = head; <br> 
+                                if(head == null) { <br> 
+                                    System.out.println("List is empty");  <br>
+                                    return;  <br>
+                                }  <br>
+                                System.out.println("Appending a node to the end of the list: ");  <br>
+                                while(curr != null) <br>
+                               {  <br>
+                                    //Prints each node by increasing order of the pointer <br>  
+                          
+                                    System.out.print(curr.data + " ");  <br>
+                                    curr = curr.next;  <br>
+                                }  <br>
+                                System.out.println();  <br>
+                            }  <br>
+                            public static void main(String[] args) {<br>  
+                                PrepIdList = new PrepInsta();<br> 
+                                //Appending 10 to the list <br> 
+                                dList.appendAtEnd(10);<br>  
+                                dList.print(); <br> 
+                                //Appending 20 to the list <br> 
+                                dList.appendAtEnd(20); <br> 
+                                dList.print();  <br>
+                                //Appending 30 to the list <br> 
+                                dList.appendAtEnd(30);<br>  
+                                dList.print(); <br> 
+                                //Appending 40 to the list<br>  
+                                dList.appendAtEnd(40);<br>
+                                dList.print(); <br>
+                                //Appending 50 to the list  <br>
+                                dList.appendAtEnd(50);<br>  
+                                dList.print();<br>  
+                            } <br> 
+                        }<br>
+                    </p>
+                </li>
+                <li>
+                    <h4>
+                        Insertion at the front:
+                    </h4>
+                    <img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/gq/2014/03/DLL_add_front1.png"alt="Insertion at the front"width="500px">
+                    <p>
+                        public class InsertStart {  <br>
+      
+                            //Represent a node of the doubly linked list  <br>
+                          
+                            class Node{  <br>
+                                int data;  <br>
+                                Node previous;<br>  
+                                Node next;  <br>
+                                  
+                                public Node(int data) {  <br>
+                                    this.data = data;<br>  
+                                }  <br>
+                            }  <br>
+                              
+                            //Represent the head and tail of the doubly linked list<br>  
+                            Node head, tail = null;  <br>
+                              
+                            //addAtStart() will add a node to the starting of the list<br>  
+                            public void addAtStart(int data) { <br> 
+                                //Create a new node  <br>
+                                Node newNode = new Node(data);  <br>
+                                  
+                                //If list is empty  <br>
+                                if(head == null) {  <br>
+                                    //Both head and tail will point to newNode  <br>
+                                    head = tail = newNode;  <br>
+                                    //head's previous will point to null <br> 
+                                    head.previous = null;  <br>
+                                    //tail's next will point to null, as it is the last node of the list  <br>
+                                    tail.next = null;  <br>
+                                }  <br>
+                                //Add newNode as new head of the list  <br>
+                                else {  <br>
+                                    //head's previous node will be newNode  <br>
+                                    head.previous = newNode;  <br>
+                                    //newNode's next node will be head  <br>
+                                    newNode.next = head;  <br>
+                                    //newNode's previous will point to null <br> 
+                                    newNode.previous = null;  <br>
+                                    //newNode will become new head  <br>
+                                    head = newNode; <br> 
+                                }  <br>
+                            }  <br>
+                              
+                            //display() will print out the nodes of the list  <br>
+                            public void display() {  <br>
+                                //Node current will point to head  <br>
+                                Node current = head; <br> 
+                                if(head == null) {  <br>
+                                    System.out.println("List is empty"); <br> 
+                                    return;  <br>
+                                }  <br>
+                                System.out.println("Adding a node to the start of the list: ");  <br>
+                                while(current != null) {  <br>
+                                    //Prints each node by incrementing the pointer. <br> 
+                          
+                                    System.out.print(current.data + " "); <br> 
+                                    current = current.next;  <br>
+                                }  
+                                System.out.println();  <br>
+                            }  <br>
+                              
+                            public static void main(String[] args) {  <br>
+                                  
+                                InsertStart dList = new InsertStart();  <br>
+                                  
+                                //Adding 1 to the list  <br>
+                                dList.addAtStart(1);  <br>
+                                dList.display();  <br>
+                                //Adding 2 to the list  <br>
+                                dList.addAtStart(2); <br> 
+                                dList.display();  <br>
+                                //Adding 3 to the list  <br>
+                                dList.addAtStart(3); <br> 
+                                dList.display(); <br> 
+                                //Adding 4 to the list <br> 
+                                dList.addAtStart(4);<br>  
+                                dList.display();<br>  
+                                //Adding 5 to the list<br>  
+                                dList.addAtStart(5); <br> 
+                                dList.display();  <br>
+                            } <br> 
+                        }<br>
+                    </p>
+                </li>
+                <li>
+                    <h4>
+                        Insertion at any position:
+                    </h4>
+                    <img src="https://static.javatpoint.com/ds/images/insertion-in-doubly-linked-list-after-specified-node.png"alt="Insertion at any position"width="500px">
+                    <p>
+                        //node structure<br>
+                        class Node {<br>
+                            int data;<br>
+                            Node next;<br>
+                            Node prev;<br>
+                        };<br>
+                        
+                        class LinkedList {<br>
+                          Node head;<br>
+                        
+                          LinkedList(){<br>
+                            head = null;<br>
+                          }<br>
+                        
+                          //Add new element at the end of the list<br>
+                          void push_back(int newElement)<br> {<br>
+                            Node newNode = new Node();<br>
+                            newNode.data = newElement;<br>
+                            newNode.next = null;<br>
+                            newNode.prev = null; <br>
+                            if(head == null) {<br>
+                              head = newNode;<br>
+                            } <br>else {<br>
+                              Node temp = new Node();<br>
+                              temp = head;<br>
+                              while(temp.next != null)<br>
+                                temp = temp.next;<br>
+                              temp.next = newNode;<br>
+                              newNode.prev = temp;<br>
+                            } <br>   
+                          }<br>
+                        
+                          //Inserts a new element at the given position<br>
+                          void push_at(int newElement, int position) { <br>    
+                            Node newNode = new Node(); <br>
+                            newNode.data = newElement;<br>
+                            newNode.next = null;<br>
+                            newNode.prev = null;<br>
+                            if(position < 1) {<br>
+                              System.out.print("\nposition should be >= 1.");<br>
+                            } <br>else if (position == 1) {<br>
+                              newNode.next = head;<br>
+                              head.prev = newNode;<br>
+                              head = newNode;<br>
+                            } <br>else {<br>
+                              Node temp = new Node();<br>
+                              temp = head;<br>
+                              for(int i = 1; i < position-1; i++) {<br>
+                                if(temp != null) {<br>
+                                  temp = temp.next;<br>
+                                }<br>
+                              }<br>
+                              if(temp != null) {<br>
+                                newNode.next = temp.next;<br>
+                                newNode.prev = temp;<br>
+                                temp.next = newNode;<br>  
+                                if(newNode.next != null)<br>
+                                  newNode.next.prev = newNode;<br>
+                              } <br>else {<br>
+                                System.out.print("\nThe previous node is null.");<br>
+                              } <br>      
+                            }<br>
+                          }  <br>
+                        
+                          //display the content of the list<br>
+                          void PrintList() {<br>
+                            Node temp = new Node();<br>
+                            temp = this.head;<br>
+                            if(temp != null) {<br>
+                              System.out.print("The list contains: ");<br>
+                              while(temp != null) {<br>
+                                System.out.print(temp.data + " ");<br>
+                                temp = temp.next;<br>
+                              }<br>
+                              System.out.println();<br>
+                            } <br>else {<br>
+                              System.out.println("The list is empty.");<br>
+                            }<br>
+                          } <br>   
+                        };<br>
+                        
+                        // test the code <br>
+                        public class Implementation {<br>
+                          public static void main(String[] args) {<br>
+                            LinkedList MyList = new LinkedList();<br>
+                        
+                            //Add three elements in the list.<br>
+                            MyList.push_back(10);<br>
+                            MyList.push_back(20);<br>
+                            MyList.push_back(30);<br>
+                            MyList.PrintList();<br>
+                        
+                            //Insert an element at position 2<br>
+                            MyList.push_at(100, 2);<br>
+                            MyList.PrintList();<br>
+                        
+                            //Insert an element at position 1
+                            MyList.push_at(200, 1);<br>
+                            MyList.PrintList();    <br>
+                          }<br>
+                        }<br>
+                    </p>
+                </li>
+            </ol>
+            <h3>
+                Time Complexity: O(1). <br>
+                <small>traversal of the linked list is not required so the time complexity is constant.<br></small>
+                Auxiliary Space: O(1).<br> 
+                <small> As no extra space is required, so the space complexity is constant.<br></small>
+            </h3>
+        </div>
+        
+        <a href="circular Linked List.html" target="_blank"><b><i></i>circular Linked List</b></a>
+        <a href="Reverse of a linked List.html" target="_blank"><b><i>Reverse of a linked List</i></b></a><br>
+        <a href="index.html">Home</a>
+    </main>
+</body>
+</html>
